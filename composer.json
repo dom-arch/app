@@ -1,0 +1,30 @@
+{
+  "name": "dom-arch/website",
+  "description": "The DOMArch website context",
+  "license": "MIT",
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/dom-arch/dom-arch"
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/dom-arch/indoctrinated"
+    }
+  ],
+  "autoload": {
+    "classmap": ["classes/Entities"],
+    "psr-4": {
+      "Assemblies\\": "classes/Assemblies",
+      "Lib\\": "classes/Lib",
+      "Modules\\": "classes/Modules",
+      "Providers\\": "classes/Providers",
+      "Repositories\\": "classes/Repositories"
+    }
+  },
+  "require": {
+    "php": ">=7.0.1",
+    "dom-arch/dom-arch": "dev-master",
+    "dom-arch/indoctrinated": "dev-master"
+  }
+}
