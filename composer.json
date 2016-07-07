@@ -1,6 +1,6 @@
 {
-  "name": "dom-arch/website",
-  "description": "The DOMArch website context",
+  "name": "dom-arch/app",
+  "description": "The DOMArch app context",
   "license": "MIT",
   "repositories": [
     {
