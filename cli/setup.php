@@ -1,6 +1,10 @@
 <?php
 require_once 'cli.php';
 
+if (Routes::getEntityRepository()->selectBy([])) {
+    exit('already defined');
+}
+
 $config = Lib\Config::global();
 $common_config = $config->get('common');
 $host = $common_config->get('urlPrefixes')->get('current');
