@@ -19,7 +19,7 @@ The DOMArch app context, sessions, pages & forms, encrypted urls, no business lo
 * Create a database like `domain-tld-app`
 * Go to the `sql` directory and execute each table script
 * In a shell, go to your `app` directory and exectute the following commands :
-  * `composer install`
+  * `composer install -o`
   * `php cli/setup.php`
 * Go to http://app.domain.tld
 
