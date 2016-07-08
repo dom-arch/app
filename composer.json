@@ -4,6 +4,10 @@
   "license": "MIT",
   "repositories": [
     {
+        "type": "vcs",
+        "url": "https://github.com/dom-arch/php-dom"
+    },
+    {
       "type": "vcs",
       "url": "https://github.com/dom-arch/dom-arch"
     },
@@ -24,7 +28,8 @@
   },
   "require": {
     "php": ">=7.0.1",
-    "dom-arch/dom-arch": "dev-master",
-    "dom-arch/indoctrinated": "dev-master"
+    "dom-arch/dom-arch": ">=0.7.0",
+    "dom-arch/php-dom": ">=0.9",
+    "dom-arch/indoctrinated": ">=0.9.8"
   }
 }
