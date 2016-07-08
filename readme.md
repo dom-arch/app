@@ -9,6 +9,8 @@ The DOMArch app context, sessions, pages & forms, encrypted urls, no business lo
 
 ## <a name="installation">Installation :</a>
 
+<strong>Please follow the [DOMArch requirements](https://github.com/dom-arch/dom-arch#requirements)</strong>
+
 <strong>If you change the following example names, please adapt your `config.json`</strong>
 
 * Firstly, install [DOMArch](https://github.com/dom-arch/dom-arch)
