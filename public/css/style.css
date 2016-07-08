@@ -393,5 +393,5 @@ input[type="file"] {
 }
 
 .untranslated {
-    background: red !important;
+    border: 1px solid red !important;
 }
