@@ -1,6 +1,7 @@
 <?php
 namespace Assemblies\HTML\Layouts;
 
+use Assemblies\HTML\Components\Nav;
 use Lib\Request;
 use DOMArch\Assembly;
 use Lib\View\HTML\Page as HTMLPage;
@@ -78,47 +79,13 @@ class Page
     )
     {
         $document = $page->getDocument();
-        $fetcher = $page->getFetcher();
         $url = $page->getUrl();
-        $alternates = $url->getAlternates();
-        $format = $url->getFormat();
-        $locale = $url->getLocale();
+
+        Nav::assemble($page);
 
         $home = $document->select('a');
-        $home->attrset->href = $url->rewrite([
-            'className' => 'Index',
-            'method' => 'get',
-            'moduleName' => 'FileReader',
-            'locale' => $locale
-        ]);
+        $home->attrset->href = $url->rewrite();
         $home->translateAttr('href');
-
-        $languages = $document->select('#languages');
-        $li_item = $fetcher->component()->anchoredItem();
-
-        $li_fragment = $li_item->fetch();
-
-        $li = $li_fragment->select('li');
-        $a = $li->select('a');
-        $a->append(strtoupper($locale));
-
-        $languages->append($li);
-
-        foreach ($alternates as $locale => $alternate) {
-            $li_fragment = $li_item->fetch();
-
-            $li = $li_fragment->select('li');
-            $a = $li->select('a');
-            $a->append(strtoupper($locale));
-            $a->attrset->href = $alternate;
-            $a->attrset->title = $format;
-            $a->attrset->lang = $locale;
-            $a->attrset->hreflang = $locale;
-
-            $a->translateAttr('title');
-
-            $languages->append($li);
-        }
     }
 
     protected static function _footer(

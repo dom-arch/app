@@ -53,18 +53,23 @@ class Page
         string $fragment = ''
     )
     {
-        return $this->_url
-            ->rewrite($params, $fragment);
+        $url = $this->_url->rewrite($params, $fragment);
+
+        $url->setModuleName($url->getModuleName());
+        $url->setClassName($url->getClassName());
+        $url->setLocale($url->getLocale());
+        $url->setMethod($url->getMethod());
+
+        return $url;
     }
 
-    public function appUrl(
+    public function websiteUrl(
         array $params = [],
         string $fragment = ''
     )
     {
-        return (string) $this->_url
-            ->rewrite($params, $fragment)
-            ->setSubDomain('app');
+        return $this->url($params, $fragment)
+            ->setSubDomain('');
     }
 
     public function __toString()

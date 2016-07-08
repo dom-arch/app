@@ -116,6 +116,19 @@ nav {
     margin-top: 1.7em;
 }
 
+nav ol:first-of-type {
+    position: absolute;
+}
+
+nav ol {
+    overflow: hidden;
+    height: 1.6em;
+}
+
+nav ol:hover {
+    overflow: visible;
+}
+
 nav ol a {
     width: 100%;
     color: #dee4ea;
@@ -135,17 +148,11 @@ nav ol li:last-child a {
 }
 
 #languages {
-    height: 1.6em;
     width: 2.5em;
-    overflow: hidden;
     color: #364c61;
     text-align: center;
     float: right;
     margin-right: .7em;
-}
-
-#languages:hover {
-    overflow: visible;
 }
 
 #languages li {
@@ -304,10 +311,6 @@ form.cheats input[type="checkbox"]:checked + label:before {
     padding-left: 1.2em;
 }
 
-.fileReader form > p:first-of-type {
-    overflow: hidden;
-}
-
 .fileReader form table,
 .fileReader form thead th:first-of-type {
     display: none;
@@ -387,4 +390,8 @@ input[type="file"] {
     opacity: 0;
     height: 7.2em;
     margin-top: -7.2em;
+}
+
+.untranslated {
+    background: red !important;
 }
