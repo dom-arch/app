@@ -13,7 +13,7 @@ $locales = $common_config->get('locales')->toArray();
 $url = Lib\Url::parse($host);
 
 $url_params = [
-    'moduleName' => 'Welcome',
+    'moduleName' => 'Login',
     'className' => 'Index',
     'method' => 'get'
 ];
@@ -25,12 +25,6 @@ $route_params = [
 ];
 
 foreach ($locales as $key => $locale) {
-    if (!$key) {
-        $route_params[$locale] = (string) $url->rewrite();
-
-        continue;
-    }
-
     $route_params[$locale] = $route_params['format'] . '&locale=' . $locale;
 }
 
