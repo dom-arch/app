@@ -75,6 +75,13 @@ class Url
         return $this;
     }
 
+    public function unsetLocale()
+    {
+        $this->_locale = null;
+
+        return $this;
+    }
+
     public function getLocale()
     {
         $locale = $this->getParams()->get('locale');
