@@ -21,7 +21,6 @@ class Nav
     {
         $document = $page->getDocument();
         $fetcher = $page->getFetcher();
-        $url = $page->getUrl();
 
         $fragment = $fetcher->component()->nav()->fetch();
         $header = $document->select('header');
@@ -33,6 +32,7 @@ class Nav
 
         $assembly->appendLinks($page);
         $assembly->appendLanguageLinks($page);
+        $assembly->translate($nav);
 
         return $assembly;
     }
@@ -52,7 +52,7 @@ class Nav
                 $anchor_url->getClassName()
             ]);
 
-            $ol->append([
+            $li = $ol->append([
                 'tag' => 'li',
                 'children' => [
                     [
