@@ -13,12 +13,15 @@ final class Auth
         $request = Incoming::current();
         $url = $request->getUrl();
         $module_name = $url->getModuleName();
+        $has_session = Session::detect();
 
         if ($module_name === 'Error') {
+            if (!$has_session) {
+                $request->home();
+            }
+
             return;
         }
-
-        $has_session = Session::detect();
 
         if ($module_name === 'Login') {
             if ($has_session) {
