@@ -16,7 +16,7 @@ The DOMArch app context, sessions, pages & forms, encrypted urls, no business lo
 * Ensure PDO is enabled
 * Clone this repository into your `entrypoints` directory
    `git clone https://github.com/dom-arch/app.git app`
-* Add a host, like `domain.tld`, to your `hosts` file
+* Add a host, like `app.domain.tld`, to your `hosts` file
 * Create a database like `domain-tld-app`
 * Go to the `sql` directory and execute each table script
 * In a shell, go to your `app` directory and exectute the following commands :
