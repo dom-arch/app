@@ -17,13 +17,11 @@ class Section
         $document = $page->getDocument();
         $fetcher = $page->getFetcher();
 
-        $fragment = $fetcher->section()
+        $section = $fetcher->section()
             ->{$name}()
             ->fetch();
 
         $container = $document->select($parent_selector ?? 'body > main');
-
-        $section = $fragment->select('section');
 
         $container->append($section);
 

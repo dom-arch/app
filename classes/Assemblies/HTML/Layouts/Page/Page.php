@@ -55,23 +55,19 @@ class Page
         $link_fetcher = $fetcher->element()->link();
         $alternate_link = $link_fetcher->alternate();
         $canonical_link = $link_fetcher->canonical();
-
-        $link_fragment = $canonical_link->fetch();
-
-        $link = $link_fragment->select('link');
+        
+        $link = $canonical_link->fetch();
         $link->attrset->href = $canonical;
         $link->attrset->hreflang = $document->lang;
 
-        foreach ($alternates as $locale => $alternate) {
-            $link_fragment = $alternate_link->fetch();
+        $head->append($link);
 
-            $link = $link_fragment->select('link');
+        foreach ($alternates as $locale => $alternate) {
+            $link = $alternate_link->fetch();
             $link->attrset->href = $alternate;
             $link->attrset->hreflang = $locale;
             $head->append($link);
         }
-
-        $head->append($link);
     }
 
     protected static function _header(
