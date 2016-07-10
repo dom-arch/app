@@ -2,7 +2,7 @@
 namespace Assemblies\HTML\Layouts;
 
 use Assemblies\HTML\Components\Nav;
-use Lib\Request;
+use Lib\Request\Incoming;
 use DOMArch\Assembly;
 use Lib\View\HTML\Page as HTMLPage;
 
@@ -13,7 +13,7 @@ class Page
         HTMLPage $page
     )
     {
-        if (http_response_code() !== Request::STATUS_OK) {
+        if (http_response_code() !== Incoming::STATUS_OK) {
             Error::assemble($page);
 
             return;
