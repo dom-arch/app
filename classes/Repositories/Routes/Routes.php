@@ -16,17 +16,9 @@ use Routes as Entity;
  */
 class Routes extends Repository
 {
-    protected static $_bundle;
-
     public static function bundle()
     {
-        if (static::$_bundle) {
-            return static::$_bundle;
-        }
-
-        static::$_bundle = new Bundle();
-
-        return static::$_bundle;
+        return new Bundle();
     }
 
     public static function parse(
