@@ -14,6 +14,6 @@ class Translations extends Repository
 {
     public static function bundle()
     {
-        return new new Bundle();
+        return new Bundle();
     }
 }
