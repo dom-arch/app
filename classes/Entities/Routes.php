@@ -2,7 +2,9 @@
 
 
 
+
 use Doctrine\ORM\Mapping as ORM;
+
 
 /**
  * Routes
@@ -12,6 +14,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Routes extends \Lib\ORM\Entity
 {
+    use Traits\Routes;
+
     /**
      * @var string
      *
@@ -47,6 +51,8 @@ class Routes extends \Lib\ORM\Entity
      */
     protected $nl;
 
+
+
     /**
      * Set format
      *
@@ -59,7 +65,7 @@ class Routes extends \Lib\ORM\Entity
     )
     {
         $this->format = $format;
-    
+
         return $this;
     }
 
@@ -77,11 +83,11 @@ class Routes extends \Lib\ORM\Entity
         if ($this->format !== null) {
             return $this;
         }
-    
+
         if (is_callable($format)) {
             return $this->setFormat($format());
         }
-    
+
         return $this->setFormat($format);
     }
 
@@ -99,11 +105,11 @@ class Routes extends \Lib\ORM\Entity
         if ($this->format !== null) {
             return $this->format;
         }
-    
+
         if (is_callable($format)) {
             return $format();
         }
-    
+
         return $format;
     }
 
@@ -119,7 +125,7 @@ class Routes extends \Lib\ORM\Entity
     )
     {
         $this->isTranslated = $is_translated;
-    
+
         return $this;
     }
 
@@ -137,11 +143,11 @@ class Routes extends \Lib\ORM\Entity
         if ($this->isTranslated !== null) {
             return $this;
         }
-    
+
         if (is_callable($is_translated)) {
             return $this->setIsTranslated($is_translated());
         }
-    
+
         return $this->setIsTranslated($is_translated);
     }
 
@@ -159,11 +165,11 @@ class Routes extends \Lib\ORM\Entity
         if ($this->isTranslated !== null) {
             return $this->isTranslated;
         }
-    
+
         if (is_callable($is_translated)) {
             return $is_translated();
         }
-    
+
         return $is_translated;
     }
 
@@ -179,7 +185,7 @@ class Routes extends \Lib\ORM\Entity
     )
     {
         $this->en = $en;
-    
+
         return $this;
     }
 
@@ -197,11 +203,11 @@ class Routes extends \Lib\ORM\Entity
         if ($this->en !== null) {
             return $this;
         }
-    
+
         if (is_callable($en)) {
             return $this->setEn($en());
         }
-    
+
         return $this->setEn($en);
     }
 
@@ -219,11 +225,11 @@ class Routes extends \Lib\ORM\Entity
         if ($this->en !== null) {
             return $this->en;
         }
-    
+
         if (is_callable($en)) {
             return $en();
         }
-    
+
         return $en;
     }
 
@@ -239,7 +245,7 @@ class Routes extends \Lib\ORM\Entity
     )
     {
         $this->fr = $fr;
-    
+
         return $this;
     }
 
@@ -257,11 +263,11 @@ class Routes extends \Lib\ORM\Entity
         if ($this->fr !== null) {
             return $this;
         }
-    
+
         if (is_callable($fr)) {
             return $this->setFr($fr());
         }
-    
+
         return $this->setFr($fr);
     }
 
@@ -279,11 +285,11 @@ class Routes extends \Lib\ORM\Entity
         if ($this->fr !== null) {
             return $this->fr;
         }
-    
+
         if (is_callable($fr)) {
             return $fr();
         }
-    
+
         return $fr;
     }
 
@@ -299,7 +305,7 @@ class Routes extends \Lib\ORM\Entity
     )
     {
         $this->nl = $nl;
-    
+
         return $this;
     }
 
@@ -317,11 +323,11 @@ class Routes extends \Lib\ORM\Entity
         if ($this->nl !== null) {
             return $this;
         }
-    
+
         if (is_callable($nl)) {
             return $this->setNl($nl());
         }
-    
+
         return $this->setNl($nl);
     }
 
@@ -339,11 +345,11 @@ class Routes extends \Lib\ORM\Entity
         if ($this->nl !== null) {
             return $this->nl;
         }
-    
+
         if (is_callable($nl)) {
             return $nl();
         }
-    
+
         return $nl;
     }
 }

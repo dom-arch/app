@@ -8,24 +8,24 @@ require_once 'cli.php';
 
     $filters = [];
 
+    $params = [
+        'orm:convert-mapping',
+        '--from-database',
+        '--extend=' . $config->get('class')
+    ];
+
     if (count($_SERVER['argv']) > 1) {
         $names = array_slice($_SERVER['argv'], 1);
 
         foreach ($names as $name) {
             $filters[] = '--filter ' . $name;
         }
+
+        $params[] = implode(' ', $filters);
     }
 
-    Indoctrinated\Db::run(
-        implode(' ', [
-            'orm:convert-mapping',
-            implode(' ', $filters),
-            //'--force',
-            '--from-database',
-            //'--namespace=' . $config->get('namespace'),
-            '--extend=' . $config->get('class'),
-            $config->get('type'),
-            $config->get('directory')
-        ])
-    );
+    $params[] = $config->get('type');
+    $params[] = $config->get('directory');
+
+    Indoctrinated\Db::run(implode(' ', $params));
 })();

@@ -1,34 +1,34 @@
 <?php
 require_once 'cli.php';
 
-if (Routes::getEntityRepository()->selectBy([])) {
-    exit('already defined');
-}
+echo 'Creating a new user (one user required as minimum)';
 
-$config = Lib\Config::global();
-$common_config = $config->get('common');
-$host = $common_config->get('urlPrefixes')->get('current');
-$locales = $common_config->get('locales')->toArray();
-
-$url = Lib\Url::parse($host);
-
-$url_params = [
-    'moduleName' => 'Login',
-    'className' => 'Index',
-    'method' => 'get'
+$fields = [
+    'account' => 'dev',
+    'type' => 'dev',
+    'email' => 'dev@domain.tld',
+    'password' => 'password',
+    'locale' => 'en'
 ];
 
-ksort($url_params);
+$length = count($fields);
+$keys = array_keys($fields);
 
-$route_params = [
-    'format' => (string) $url->rewrite($url_params)
-];
+for ($iterator = 0; $iterator < $length; $iterator += 1) {
+    $key = $keys[$iterator];
 
-foreach ($locales as $key => $locale) {
-    $route_params[$locale] = $route_params['format'] . '&locale=' . $locale;
+    echo 'Enter the user ' . $key . ' [' . $fields[$key] . '] : ';
+
+    $input = trim(fgets(STDIN));
+
+    $fields[$key] = empty($input)
+        ? $fields[$key]
+        : $input;
 }
 
-Routes::fromArray($route_params)->save();
+$fields['password'] = password_hash($fields['password'], PASSWORD_DEFAULT);
+
+Users::fromArray($fields)->save();
 
 echo 'done';
 

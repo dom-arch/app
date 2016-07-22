@@ -20,5 +20,6 @@ error_reporting(E_ALL);
 Lib\Config::parse('config.json', true);
 DOMArch\ErrorHandler::handle();
 Lib\Bootstrap\Web::bootstrap();
+Lib\Request\Incoming::requested();
 Lib\Auth::detect();
 Lib\Request\Incoming::current()->respond();
