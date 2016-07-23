@@ -6,7 +6,12 @@ require_once 'cli.php';
         ->get('context')
             ->get('repositories');
 
+
     $filters = [];
+
+    $params = [
+        'orm:generate-repositories'
+    ];
 
     if (count($_SERVER['argv']) > 1) {
         $names = array_slice($_SERVER['argv'], 1);
@@ -14,13 +19,12 @@ require_once 'cli.php';
         foreach ($names as $name) {
             $filters[] = '--filter ' . $name;
         }
+
+        $params[] = implode(' ', $filters);
     }
 
-    Indoctrinated\Db::run(
-        implode(' ', [
-            'orm:generate-repositories',
-            implode(' ', $filters),
-            $config->get('directory')
-        ])
-    );
+    $params[] = '--';
+    $params[] = $config->get('directory');
+
+    Indoctrinated\Db::run(implode(' ', $params));
 })();
