@@ -17,7 +17,7 @@ final class Auth
 
         if ($module_name === 'Error') {
             if (!$has_session) {
-                $request->home();
+                $request->forceAuthentication();
             }
 
             return;
