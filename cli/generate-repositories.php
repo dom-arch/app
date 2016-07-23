@@ -6,7 +6,6 @@ require_once 'cli.php';
         ->get('context')
             ->get('repositories');
 
-
     $filters = [];
 
     $params = [
