@@ -21,12 +21,14 @@ class Url
         return $this;
     }
 
-    public function getModuleName(
-        string $default = 'Welcome'
-    )
+    public function getModuleName()
     {
         return $this->getParams()
-            ->get('moduleName', $default);
+            ->get('moduleName')
+        ?? Config::global()
+            ->get('context')
+            ->get('home')
+            ->get('module');
     }
 
     public function setClassName(
@@ -39,12 +41,11 @@ class Url
         return $this;
     }
 
-    public function getClassName(
-        string $default = 'Index'
-    )
+    public function getClassName()
     {
         return $this->getParams()
-            ->get('className', $default);
+            ->get('className', $default)
+        ?? 'Index';
     }
 
     public function setMethod(
