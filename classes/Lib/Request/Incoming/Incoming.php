@@ -142,7 +142,10 @@ class Incoming extends \DOMArch\Request\Incoming
         $url = $requested_url->rewrite([
             'className' => 'Index',
             'method' => 'get',
-            'moduleName' => 'FileReader',
+            'moduleName' => Config::global()
+                ->get('context')
+                ->get('home')
+                ->get('module'),
             'locale' => $locale
         ]);
 
