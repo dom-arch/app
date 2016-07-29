@@ -61,6 +61,7 @@ class Bundle
             if (array_key_exists($format, $routes)) {
                 $route = $routes[$format];
             } else {
+                var_dump($format);
                 $route = $bundle->_onDefault($format);
             }
 
@@ -96,7 +97,11 @@ class Bundle
 
         $entity_class = $this->_entityClass;
 
-        return $entity_class::fromArray($fields)
+        $entity = $entity_class::fromArray($fields)
             ->save();
+
+        $this->_results[$format] = $entity;
+
+        return $entity;
     }
 }
