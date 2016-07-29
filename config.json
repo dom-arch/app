@@ -37,6 +37,9 @@
   },
   "web": {
     "isDevMode": true,
+    "home": {
+      "module": "FileReader"
+    },
     "entities": {
       "directory": "./classes/Entities"
     },
