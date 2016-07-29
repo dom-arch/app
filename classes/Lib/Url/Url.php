@@ -44,8 +44,7 @@ class Url
     public function getClassName()
     {
         return $this->getParams()
-            ->get('className', $default)
-        ?? 'Index';
+            ->get('className', 'Index');
     }
 
     public function setMethod(
