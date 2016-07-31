@@ -52,13 +52,13 @@ class Routes extends Repository
         $callback = function($matches)
         use (&$params, &$counter) {
             $counter += 1;
-            $sprintf_params[] = $matches[2];
+            $params[] = $matches[2];
 
-            return '%' . $counter . '$s';
+            return '=%' . $counter . '$s';
         };
 
         $format = preg_replace_callback(
-            '/(-\()([^)]+)(\)-?)/', $callback, $url
+            '/(=)(\d+)/', $callback, $url
         );
 
         return [$format, $params];
