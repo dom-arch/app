@@ -48,7 +48,7 @@ class Bundle
                 $counter += 1;
                 $sprintf_params[] = $value;
                 
-                $params[$name] = '%' . $counter . 's';
+                $params[$name] = '%' . $counter . '$s';
             }
         }
 
