@@ -1,4 +1,4 @@
-void function (global) {
+void function(global) {
     'use strict';
 
     var lib;
@@ -230,6 +230,20 @@ void function (global) {
             }
         }()
     ];
+
+    lib.pagination = function() {
+        var document,
+            lines;
+
+        document = global.document;
+        lines = document.querySelectorAll('.pagination tbody tr');
+
+        Array.prototype.forEach.call(lines, function(line) {
+            line.addEventListener('click', function() {
+                global.location = line.dataset.url;
+            });
+        });
+    }();
 
     global.lib = lib;
 }(this);
