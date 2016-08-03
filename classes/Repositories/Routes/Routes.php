@@ -101,10 +101,6 @@ class Routes extends Repository
             return;
         }
 
-        $key = Config::global()
-            ->get('common')
-            ->get('encryptionKey');
-
         $resolved_url->setFormat($format);
         
         $data = $route->toArray();
@@ -112,15 +108,11 @@ class Routes extends Repository
         foreach ($locales as $locale) {
             $translation = sprintf($data[$locale], ...$params);
 
-            $encrypted = Url::parse($translation)
-                ->setMethod('get')
-                ->encrypt($key);
-
             if ($translation === $requested_url && !$resolved_url->getCanonical()) {
                 $resolved_url->setLocale($locale);
-                $resolved_url->setCanonical($encrypted);
+                $resolved_url->setCanonical($translation);
             } else {
-                $resolved_url->addAlternate($locale, $encrypted);
+                $resolved_url->addAlternate($locale, $translation);
             }
         }
 
