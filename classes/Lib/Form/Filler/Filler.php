@@ -28,6 +28,14 @@ class Filler
                 continue;
             }
 
+            if ($element->nodeName === 'select') {
+                $element->value = null;
+            } else if ($attrset->type === 'radio')) {
+                $element->value = null;
+            } else if ($attrset->type === 'checkbox') {
+                $element->value = null;
+            }
+
             $element->value = $values[$name];
         }
 
