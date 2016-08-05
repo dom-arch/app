@@ -79,8 +79,10 @@ class Routes extends Repository
             ->createQueryBuilder('route')
             ->andWhere(implode(' OR ', $conditions))
             ->andWhere('route.archivedAt IS NULL')
+            ->orWhere('route.format = :format')
             ->setParameters([
-                'translation' => $translation
+                'translation' => $translation,
+                'format' => $translation
             ])
             ->getQuery()
             ->getOneOrNullResult();
