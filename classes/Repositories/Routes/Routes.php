@@ -2,6 +2,7 @@
 
 namespace Repositories;
 
+use Exception;
 use Indoctrinated\Repository;
 use Lib\Config;
 use Lib\Url;
@@ -22,8 +23,7 @@ class Routes extends Repository
     }
 
     public static function parse(
-        Url $url,
-        string $method
+        Url $url
     )
     {
         $common_config = Config::global()->get('common');
@@ -39,7 +39,7 @@ class Routes extends Repository
             return;
         }
 
-        return static::_getUrl($route, $url_string, $method, $locales, $params);
+        return static::_getUrl($route, $url_string, $locales, $params);
     }
 
     protected static function _getFormat(
@@ -51,14 +51,18 @@ class Routes extends Repository
 
         $callback = function($matches)
         use (&$params, &$counter) {
-            $counter += 1;
-            $params[] = $matches[2];
+            if (in_array($matches[1], ['className', 'method', 'moduleName', 'locale'])) {
+                return $matches[0];
+            }
 
-            return '=%' . $counter . '$s';
+            $counter += 1;
+            $params[] = $matches[3];
+
+            return $matches[1] . '=%' . $counter . '$s';
         };
 
         $format = preg_replace_callback(
-            '/(=)(\d+)/', $callback, $url
+            '/([a-zA-Z]+)(=)([^&]*)/', $callback, $url
         );
 
         return [$format, $params];
@@ -75,36 +79,34 @@ class Routes extends Repository
             $conditions[] = 'route.' . $locale . ' = :translation';
         }
 
-        return Entity::getEntityRepository()
-            ->createQueryBuilder('route')
-            ->andWhere(implode(' OR ', $conditions))
-            ->andWhere('route.archivedAt IS NULL')
-            ->orWhere('route.format = :format')
-            ->setParameters([
-                'translation' => $translation,
-                'format' => $translation
-            ])
-            ->getQuery()
-            ->getOneOrNullResult();
+        try {
+            return Entity::getEntityRepository()
+                ->createQueryBuilder('route')
+                ->andWhere(implode(' OR ', $conditions))
+                ->andWhere('route.archivedAt IS NULL')
+                ->orWhere('route.format = :format')
+                ->setParameters([
+                    'translation' => $translation,
+                    'format' => $translation
+                ])
+                ->setMaxResults(1)
+                ->getQuery()
+                ->getResult()[0] ?? null;
+        } catch (Exception $exception) {
+            return null;
+        }
     }
 
     protected static function _getUrl(
         Entity $route,
         string $requested_url,
-        string $method,
         array $locales,
         array $params
     )
     {
         $format = $route->getFormat();
         $resolved_url = Url::parse(sprintf($format, ...$params));
-
-        if ($resolved_url->getMethod() !== $method) {
-            return;
-        }
-
         $resolved_url->setFormat($format);
-        
         $data = $route->toArray();
 
         foreach ($locales as $locale) {
