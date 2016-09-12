@@ -77,6 +77,15 @@ class Page
 
     public function __toString()
     {
+        $content_popup = $this->select('.contentPopup');
+
+        if ($content_popup) {
+            $html = (string) $content_popup;
+            $memory = memory_get_peak_usage(true) / (1024 * 1024);
+
+            return $html . '<!-- ' . $memory . ' -->' . PHP_EOL;
+        }
+        
         $html = parent::__toString();
         $memory = memory_get_peak_usage(true) / (1024 * 1024);
 
